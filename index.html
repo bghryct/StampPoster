@@ -132,27 +132,24 @@
       currentSize = event.target.value;
     });
     
-    function saveCanvasAsPDF() {
-  var canvas = document.getElementById('canvas');
-  var imgData = canvas.toDataURL('image/jpg');
-  var pdf = new jsPDF();
+    // Download button
+  $("#save-button").on('click', function () {
+    let width = __CANVAS.width; 
+    let height = __CANVAS.height;
 
-  // Calculate the dimensions of the PDF page based on the canvas size
-  var canvasWidth = canvas.width;
-  var canvasHeight = canvas.height;
-  var pageWidth = canvasWidth * 0.2646; // Convert pixels to millimeters (assuming 96 DPI)
-  var pageHeight = canvasHeight * 0.2646; // Convert pixels to millimeters (assuming 96 DPI)
-
-  // Add the canvas image to the PDF document
-  pdf.addImage(imgData, 'JPG', 0, 0, pageWidth, pageHeight);
-
-  // Prompt the user to save the PDF file
-  pdf.save('canvas.pdf');
-
-    const saveButton = document.getElementById("save-button");
-    saveButton.addEventListener("click", function(event) {
-    saveCanvasAsPDF();
-    });
+    //set the orientation
+    if(width > height){
+      pdf = new jsPDF('l', 'px', [width, height]);
+    }
+    else{
+      pdf = new jsPDF('p', 'px', [height, width]);
+    }
+    //then we get the dimensions from the 'pdf' file itself
+    width = pdf.internal.pageSize.getWidth();
+    height = pdf.internal.pageSize.getHeight();
+    pdf.addImage(__CANVAS, 'PNG', 0, 0,width,height);
+    pdf.save("download.pdf");
+  });
 
 
 }
