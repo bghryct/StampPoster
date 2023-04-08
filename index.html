@@ -74,24 +74,25 @@
       currentSize = event.target.value;
     });
     
-    // Download button
-  document.getElementById("save-button").on('click', function () {
-    let width = __CANVAS.width; 
-    let height = __CANVAS.height;
+ // Download button
+document.getElementById("save-button").addEventListener('click', function () {
+  let pdf = null;
+  let width = canvas.width; 
+  let height = canvas.height;
 
-    //set the orientation
-    if(width > height){
-      pdf = new jsPDF('l', 'px', [width, height]);
-    }
-    else{
-      pdf = new jsPDF('p', 'px', [height, width]);
-    }
-    //then we get the dimensions from the 'pdf' file itself
-    width = pdf.internal.pageSize.getWidth();
-    height = pdf.internal.pageSize.getHeight();
-    pdf.addImage(canvas, 'PNG', 0, 0, width, height);
-    pdf.save("download.pdf");
-  });
+  //set the orientation
+  if(width > height){
+    pdf = new jsPDF('l', 'px', [width, height]);
+  }
+  else{
+    pdf = new jsPDF('p', 'px', [height, width]);
+  }
+  //then we get the dimensions from the 'pdf' file itself
+  width = pdf.internal.pageSize.getWidth();
+  height = pdf.internal.pageSize.getHeight();
+  pdf.addImage(canvas.toDataURL(), 'PNG', 0, 0, width, height);
+  pdf.save("download.pdf");
+});
   </script>
 </body>
 </html>
