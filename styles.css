@@ -108,6 +108,7 @@ transform: scale(0.95);
 #canvas {
   border: 1px solid #ccc;
   border-radius: 4px;
+  background:white;
 }
 
 /* Center the button container on a new row */
