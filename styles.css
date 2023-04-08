@@ -57,6 +57,36 @@ select:focus {
 }
 
 
+/* Style the save button */
+#save-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Style the save button when hovered */
+#save-button:hover {
+ /* Increase the box shadow when hovered */
+box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+}
+
+/* Increase the box shadow and scale the button when focused */
+#save-button:focus {
+outline: none;
+box-shadow: 0 4px 8px rgba(0, 123, 255, 0.6);
+transform: scale(1.05);
+}
+
+/* Decrease the box shadow and scale the button when clicked */
+#save-button:active {
+box-shadow: none;
+transform: scale(0.95);
+}
+
 #canvas{
 border: 1px solid black;
 }
