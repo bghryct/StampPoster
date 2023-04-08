@@ -139,7 +139,7 @@
 
 function saveCanvasAsPDF() {
   var canvas = document.getElementById('canvas');
-  var imgData = canvas.toDataURL('image/png');
+  var imgData = canvas.toDataURL('image/jpg');
   var pdf = new jsPDF();
 
   // Calculate the dimensions of the PDF page based on the canvas size
@@ -149,7 +149,7 @@ function saveCanvasAsPDF() {
   var pageHeight = canvasHeight * 0.2646; // Convert pixels to millimeters (assuming 96 DPI)
 
   // Add the canvas image to the PDF document
-  pdf.addImage(imgData, 'PNG', 0, 0, pageWidth, pageHeight);
+  pdf.addImage(imgData, 'JPG', 0, 0, pageWidth, pageHeight);
 
   // Prompt the user to save the PDF file
   pdf.save('canvas.pdf');
