@@ -109,3 +109,10 @@ transform: scale(0.95);
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+
+/* Center the button container on a new row */
+.button-container {
+  grid-column: 1 / -1; /* span across all columns */
+  display: flex;
+  justify-content: center;
+}
