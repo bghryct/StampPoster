@@ -124,14 +124,36 @@
       currentCharacter = event.target.value;
     });
     
-    const saveButton = document.getElementById("save-button");
-    saveButton.addEventListener("click", function(event) {
-      const pdf = new jsPDF("landscape", "in", "11x17");
-      const canvasImg = canvas.toDataURL("image/png", 1.0);
-      pdf.addImage(canvasImg, "PNG", 0, 0, 17, 11);
-      pdf.save("stamps.pdf");
+ function save() {
+  // get the canvas element
+  const canvas = document.getElementById('canvas');
+
+  // create a new PDF document
+  const pdfDoc = new pdfjsLib.Document();
+
+  // set the page size to 11 x 17 inches
+  const pageSize = new pdfjsLib.PageSize({ width: 792, height: 1224 });
+  pdfDoc.setPageSize(pageSize);
+
+  // add a new page to the document
+  const page = pdfDoc.addPage();
+
+  // get the canvas content as an image
+  const imgData = canvas.toDataURL('image/png');
+
+  // create a new image element
+  const img = new pdfjsLib.Image();
+  img.src = imgData;
+
+  // draw the image on the page
+  const ctx = page.getContext();
+  ctx.drawImage(img, 0, 0, pageSize.width, pageSize.height);
+
+  // create a PDF blob and save the file
+  pdfDoc.save('stamped_page.pdf');
+}
     });
   </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/3.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
 </body>
 </html>
