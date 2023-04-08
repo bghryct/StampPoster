@@ -21,6 +21,13 @@
     <!-- Add more options for other fonts -->
   </select>
   
+    <label for="size-select">Size:</label>
+  <select id="size-select">
+    <option value="12">12 pt</option>
+    <option value="36">36 pt</option>
+    <option value="72">72 pt</option>
+  </select>
+  
   <label for="character-select">Select a character:</label>
   <select id="character-select">
     <option value="A">A</option>
@@ -122,6 +129,11 @@
     const characterSelect = document.getElementById("character-select");
     characterSelect.addEventListener("change", function(event) {
       currentCharacter = event.target.value;
+    });
+    
+       const sizeSelect = document.getElementById("size-select");
+    sizeSelect.addEventListener("change", function(event) {
+      currentSize = event.target.value;
     });
     
  function save() {
