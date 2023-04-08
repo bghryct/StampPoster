@@ -98,23 +98,13 @@ transform: scale(0.95);
 
 /* Style the canvas */
 
-/* Set the position of the canvas to relative */
-#canvas {
-  position: relative;
+/* Center the canvas container on a new row */
+.canvas-container {
+  grid-column: 1 / -1; /* span across all columns */
+  display: flex;
+  justify-content: center;
 }
 
-/* Center the canvas horizontally */
-#canvas {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Offset the canvas vertically to center it relative to other elements */
-#canvas {
-  top: 50%;
-  transform: translateY(-50%);
-}
 #canvas {
   border: 1px solid #ccc;
   border-radius: 4px;
