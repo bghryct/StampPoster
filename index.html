@@ -177,58 +177,6 @@
   <button id="save-button">Save as PDF</button>
   </div>
   
-<script>
-  //delete this if it doesn't work
-  // Get the canvas element and its context
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');
-
-// Set up some variables to track the state of the rectangle being drawn
-let isDragging = false;
-let startX, startY, endX, endY;
-
-// Set up the color picker element
-const colorPicker = document.createElement('input');
-colorPicker.type = 'color';
-colorPicker.value = '#000000'; // Set the initial color to black
-
-// Add an event listener to the color picker to update the strokeStyle of the context
-colorPicker.addEventListener('input', (e) => {
-  ctx.strokeStyle = e.target.value;
-});
-
-// Add the color picker to the page
-document.body.appendChild(colorPicker);
-
-// Add event listeners to the canvas to handle rectangle drawing
-canvas.addEventListener('mousedown', (e) => {
-  // Start drawing the rectangle
-  isDragging = true;
-  startX = e.clientX - canvas.offsetLeft;
-  startY = e.clientY - canvas.offsetTop;
-});
-
-canvas.addEventListener('mousemove', (e) => {
-  if (isDragging) {
-    // Update the position of the rectangle being drawn
-    endX = e.clientX - canvas.offsetLeft;
-    endY = e.clientY - canvas.offsetTop;
-
-    // Clear the canvas and redraw the rectangle
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.strokeRect(startX, startY, endX - startX, endY - startY);
-  }
-});
-
-canvas.addEventListener('mouseup', (e) => {
-  // Stop drawing the rectangle
-  isDragging = false;
-
-  // Save the rectangle as an image on the canvas
-  ctx.drawImage(canvas, startX, startY, endX - startX, endY - startY, startX, startY, endX - startX, endY - startY);
-});
-  //delete this if it doesn't work
-  </script>
   
   <script>
     //not sure if this helps
