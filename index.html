@@ -132,12 +132,23 @@
       currentSize = event.target.value;
     });
     
-    const saveButton = document.getElementById("save-button");
-    saveButton.addEventListener("click", function(event) {
-      const pdf = new jsPDF("landscape", "in", "11x17");
-      const canvasImg = canvas.toDataURL("image/png", 1.0);
-      pdf.addImage(canvasImg, "PNG", 0, 0, 17, 11);
-      pdf.save("stamps.pdf");
+function saveCanvasAsPDF() {
+  var canvas = document.getElementById('canvas');
+  var imgData = canvas.toDataURL('image/png');
+  var pdf = new jsPDF();
+
+  // Calculate the dimensions of the PDF page based on the canvas size
+  var canvasWidth = canvas.width;
+  var canvasHeight = canvas.height;
+  var pageWidth = canvasWidth * 0.2646; // Convert pixels to millimeters (assuming 96 DPI)
+  var pageHeight = canvasHeight * 0.2646; // Convert pixels to millimeters (assuming 96 DPI)
+
+  // Add the canvas image to the PDF document
+  pdf.addImage(imgData, 'PNG', 0, 0, pageWidth, pageHeight);
+
+  // Prompt the user to save the PDF file
+  pdf.save('canvas.pdf');
+}
     });
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
