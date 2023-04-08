@@ -95,13 +95,27 @@ box-shadow: none;
 transform: scale(0.95);
 }
 
+
 /* Style the canvas */
+
+/* Set the position of the canvas to relative */
 #canvas {
-    position: absolute;
+  position: relative;
+}
+
+/* Center the canvas horizontally */
+#canvas {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Offset the canvas vertically to center it relative to other elements */
+#canvas {
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  margin: auto;
+  transform: translateY(-50%);
+}
+#canvas {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
