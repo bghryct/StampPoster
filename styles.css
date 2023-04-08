@@ -120,7 +120,7 @@ transform: scale(0.95);
 
 
 body {
-  background: linear-gradient(to bottom, #e6f7ff, #f0e6ff, #ffe6f9);
+  background: linear-gradient(to left, #e6f7ff, #f0e6ff, #ffe6f9);
   animation: murmuring 20s ease-in-out infinite;
 }
 
