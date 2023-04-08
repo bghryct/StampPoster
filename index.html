@@ -75,7 +75,7 @@
     });
     
     // Download button
-  document.getElementById("#save-button").on('click', function () {
+  document.getElementById("save-button").on('click', function () {
     let width = __CANVAS.width; 
     let height = __CANVAS.height;
 
@@ -89,7 +89,7 @@
     //then we get the dimensions from the 'pdf' file itself
     width = pdf.internal.pageSize.getWidth();
     height = pdf.internal.pageSize.getHeight();
-    pdf.addImage(__CANVAS, 'PNG', 0, 0,width,height);
+    pdf.addImage(canvas, 'PNG', 0, 0, width, height);
     pdf.save("download.pdf");
   });
   </script>
