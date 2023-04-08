@@ -131,13 +131,8 @@
     sizeSelect.addEventListener("change", function(event) {
       currentSize = event.target.value;
     });
-
-    const saveButton = document.getElementById("save-button");
-    saveButton.addEventListener("click", function(event) {
-    saveCanvasAsPDF();
-    });
-
-function saveCanvasAsPDF() {
+    
+    function saveCanvasAsPDF() {
   var canvas = document.getElementById('canvas');
   var imgData = canvas.toDataURL('image/jpg');
   var pdf = new jsPDF();
@@ -153,6 +148,13 @@ function saveCanvasAsPDF() {
 
   // Prompt the user to save the PDF file
   pdf.save('canvas.pdf');
+
+    const saveButton = document.getElementById("save-button");
+    saveButton.addEventListener("click", function(event) {
+    saveCanvasAsPDF();
+    });
+
+
 }
 
   </script>
