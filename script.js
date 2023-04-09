@@ -1,5 +1,9 @@
 window.jsPDF = window.jspdf.jsPDF;
 
+const fontUpload = document.getElementById("font-upload");
+fontUpload.addEventListener('change', handleFontUpload, false);
+// adding in font upload capability
+
 const canvas = document.getElementById("canvas");
 const context = canvas.getContext("2d");
 const previewCanvas = document.getElementById("preview-canvas"); // New canvas element for preview
@@ -9,20 +13,35 @@ let currentCharacter = "A";
 let currentSize = "12";
 let currentColor = "#000000";
 
+
+function handleFontUpload(event) {
+  const file = event.target.files[0];
+  const reader = new FileReader();
+  reader.readAsArrayBuffer(file);
+  reader.onload = function() {
+    const fontArrayBuffer = reader.result;
+    const font = new FontFace('customFont', fontArrayBuffer);
+    font.load().then(function(loadedFont) {
+      document.fonts.add(loadedFont);
+      currentFont = 'customFont'; // set the current font to the uploaded font
+    });
+  }
+}
+
 function drawCharacter(x, y) {
-   context.font = currentSize + "pt " + currentFont;
-   context.fillStyle = currentColor;
-   context.fillText(currentCharacter, x, y);
+  context.font = currentSize + "pt " + currentFont;
+  context.fillStyle = currentColor;
+  context.fillText(currentCharacter, x, y);
 }
 
 function drawPreviewCharacter(x, y) {
-   previewContext.clearRect(0, 0, previewCanvas.width, previewCanvas.height); // Clear the preview canvas
-   previewContext.font = currentSize + "pt " + currentFont;
-   previewContext.fillStyle = currentColor;
-   previewContext.globalAlpha = 0.5; // Lower opacity for preview
-   const width = previewContext.measureText(currentCharacter).width;
-   previewContext.fillText(currentCharacter, x, y);
-   previewContext.globalAlpha = 1; // Reset opacity
+  previewContext.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
+  previewContext.font = currentSize + "pt " + currentFont;
+  previewContext.fillStyle = currentColor;
+  previewContext.globalAlpha = 0.5;
+  const width = previewContext.measureText(currentCharacter).width;
+  previewContext.fillText(currentCharacter, x, y);
+  previewContext.globalAlpha = 1;
 }
 
 canvas.addEventListener("mousemove", function(event) { // Listen for mouse move event
