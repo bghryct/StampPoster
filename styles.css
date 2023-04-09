@@ -98,17 +98,18 @@ transform: scale(0.95);
 
 /* Style the canvas */
 
-/* Center the canvas container on a new row */
 .canvas-container {
-  grid-column: 1 / -1; /* span across all columns */
+  grid-column: 1 / -1;
   display: flex;
   justify-content: center;
+  position: relative;
 }
 
 #canvas {
   border: 1px solid #ccc;
   border-radius: 4px;
-  background:white;
+  background: white;
+  position: relative;
 }
 
 #preview-canvas {
