@@ -111,6 +111,14 @@ transform: scale(0.95);
   background:white;
 }
 
+#preview-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 /* Center the button container on a new row */
 .button-container {
   grid-column: 1 / -1; /* span across all columns */
