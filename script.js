@@ -20,7 +20,8 @@ function drawPreviewCharacter(x, y) {
    previewContext.font = currentSize + "pt " + currentFont;
    previewContext.fillStyle = currentColor;
    previewContext.globalAlpha = 0.5; // Lower opacity for preview
-   previewContext.fillText(currentCharacter, x, y);
+   const width = previewContext.measureText(currentCharacter).width;
+   previewContext.fillText(currentCharacter, x - width / 2, y);
    previewContext.globalAlpha = 1; // Reset opacity
 }
 
