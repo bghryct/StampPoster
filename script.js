@@ -21,7 +21,7 @@ function drawPreviewCharacter(x, y) {
    previewContext.fillStyle = currentColor;
    previewContext.globalAlpha = 0.5; // Lower opacity for preview
    const width = previewContext.measureText(currentCharacter).width;
-   previewContext.fillText(currentCharacter, x - width / 2, y);
+   previewContext.fillText(currentCharacter, x, y);
    previewContext.globalAlpha = 1; // Reset opacity
 }
 
