@@ -113,6 +113,8 @@ transform: scale(0.95);
 }
 
 #preview-canvas {
+  border: 1px solid red;
+  border-radius: 4px;
   position: absolute;
   top: 0;
   left: 0;
