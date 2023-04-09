@@ -1,18 +1,35 @@
-//not sure if this helps
 window.jsPDF = window.jspdf.jsPDF;
 
 const canvas = document.getElementById("canvas");
 const context = canvas.getContext("2d");
+const previewCanvas = document.getElementById("preview-canvas"); // New canvas element for preview
+const previewContext = previewCanvas.getContext("2d"); // Context for preview canvas
 let currentFont = "Arial";
 let currentCharacter = "A";
 let currentSize = "12";
-let currentColor = "#000000"; //initialize the current color to black
+let currentColor = "#000000";
 
 function drawCharacter(x, y) {
    context.font = currentSize + "pt " + currentFont;
-   context.fillStyle = currentColor; //set the fillStyle to the current color
-   context.fillText(currentCharacter, x, y); //draw the text with the current color
+   context.fillStyle = currentColor;
+   context.fillText(currentCharacter, x, y);
 }
+
+function drawPreviewCharacter(x, y) {
+   previewContext.clearRect(0, 0, previewCanvas.width, previewCanvas.height); // Clear the preview canvas
+   previewContext.font = currentSize + "pt " + currentFont;
+   previewContext.fillStyle = currentColor;
+   previewContext.globalAlpha = 0.5; // Lower opacity for preview
+   previewContext.fillText(currentCharacter, x, y);
+   previewContext.globalAlpha = 1; // Reset opacity
+}
+
+canvas.addEventListener("mousemove", function(event) { // Listen for mouse move event
+   const rect = canvas.getBoundingClientRect();
+   const x = event.clientX - rect.left;
+   const y = event.clientY - rect.top;
+   drawPreviewCharacter(x, y);
+});
 
 canvas.addEventListener("click", function(event) {
    const rect = canvas.getBoundingClientRect();
@@ -41,13 +58,11 @@ colorPicker.addEventListener("input", function(event) {
    currentColor = event.target.value;
 });
 
-// Download button
 document.getElementById("save-button").addEventListener('click', function () {
    let pdf = null;
    let width = canvas.width; 
    let height = canvas.height;
 
-   //set the orientation
    if(width > height){
       pdf = new jsPDF('l', 'px', [width, height]);
    }
@@ -55,7 +70,6 @@ document.getElementById("save-button").addEventListener('click', function () {
       pdf = new jsPDF('p', 'px', [height, width]);
    }
 
-   //then we get the dimensions from the 'pdf' file itself
    width = pdf.internal.pageSize.getWidth();
    height = pdf.internal.pageSize.getHeight();
    pdf.addImage(canvas.toDataURL(), 'PNG', 0, 0, width, height);
