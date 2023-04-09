@@ -97,11 +97,11 @@ transform: scale(0.95);
 
 
 /* Style the canvas */
-/* Style the canvas */
 .canvas-container {
-  grid-column: 1 / -1;
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 100%;
   position: relative;
 }
 
@@ -109,19 +109,20 @@ transform: scale(0.95);
   border: 1px solid #ccc;
   border-radius: 4px;
   background: white;
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
+  z-index: 1; /* added to place it underneath #preview-canvas */
 }
 
 #preview-canvas {
   border: 1px solid red;
   border-radius: 4px;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   opacity: 0.5;
   pointer-events: none;
+  z-index: 2; /* added to place it on top of #canvas */
 }
 
 /* Center the button container on a new row */
