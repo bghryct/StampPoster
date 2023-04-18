@@ -77,21 +77,39 @@ const colorPicker = document.getElementById("color-picker");
 colorPicker.addEventListener("input", function(event) {
    currentColor = event.target.value;
 });
-
+//save as svg functionality
 document.getElementById("save-button").addEventListener('click', function () {
-   let pdf = null;
-   let width = canvas.width; 
-   let height = canvas.height;
-
-   if(width > height){
-      pdf = new jsPDF('l', 'px', [width, height]);
-   }
-   else{
-      pdf = new jsPDF('p', 'px', [height, width]);
-   }
-
-   width = pdf.internal.pageSize.getWidth();
-   height = pdf.internal.pageSize.getHeight();
-   pdf.addImage(canvas.toDataURL(), 'PNG', 0, 0, width, height);
-   pdf.save("download.pdf");
+   let svg = new XMLSerializer().serializeToString(canvas);
+   let blob = new Blob([svg], {type: "image/svg+xml;charset=utf-8"});
+   saveAs(blob, "download.svg");
 });
+// font handling for svg save
+function getFontDataURL(font) {
+  return new Promise(function(resolve, reject) {
+    let reader = new FileReader();
+    reader.onload = function() {
+      let arrayBuffer = reader.result;
+      let uint8Array = new Uint8Array(arrayBuffer);
+      let data = btoa(String.fromCharCode.apply(null, uint8Array));
+      let format = font.split('.').pop();
+      let url = 'data:font/' + format + ';base64,' + data;
+      resolve(url);
+    };
+    reader.readAsArrayBuffer(font);
+  });
+}
+
+function handleFontUpload(event) {
+  const file = event.target.files[0];
+  const font = new FontFace('customFont', 'url(' + URL.createObjectURL(file) + ')');
+  font.load().then(function(loadedFont) {
+    document.fonts.add(loadedFont);
+    getFontDataURL(file).then(function(dataURL) {
+      canvas.style.fontFamily = 'customFont';
+      let svg = new XMLSerializer().serializeToString(canvas);
+      svg = svg.replace(/<text/g, '<text font-family="' + dataURL + '"');
+      let blob = new Blob([svg], {type: "image/svg+xml;charset=utf-8"});
+      saveAs(blob, "download.svg");
+    });
+  });
+}
