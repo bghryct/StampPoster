@@ -13,19 +13,7 @@ let currentSize = "12";
 let currentColor = "#000000";
 
 
-function handleFontUpload(event) {
-  const file = event.target.files[0];
-  const reader = new FileReader();
-  reader.readAsArrayBuffer(file);
-  reader.onload = function() {
-    const fontArrayBuffer = reader.result;
-    const font = new FontFace('customFont', fontArrayBuffer);
-    font.load().then(function(loadedFont) {
-      document.fonts.add(loadedFont);
-      currentFont = 'customFont'; // set the current font to the uploaded font
-    });
-  }
-}
+
 
 function drawCharacter(x, y) {
   context.font = currentSize + "pt " + currentFont;
