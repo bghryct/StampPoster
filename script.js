@@ -1,4 +1,3 @@
-window.jsPDF = window.jspdf.jsPDF;
 
 const fontUpload = document.getElementById("font-upload");
 fontUpload.addEventListener('change', handleFontUpload, false);
